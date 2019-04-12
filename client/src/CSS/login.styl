@@ -1,0 +1,116 @@
+.login__main
+    display flex
+    flex-wrap: wrap
+    align-items center 
+    justify-content center
+    height 100%
+
+.login__banner 
+    flex 50%
+    position relative
+    display flex 
+    align-items center
+    justify-content center
+
+.login__img-wrapper
+    width 100%
+
+.login__img 
+    object-fit cover
+    width 100%
+    height 100%
+    min-height 100vh
+    filter grayscale(100%)
+
+.login__banner-header 
+    position absolute 
+    top 0 
+    bottom 0 
+    left 0 
+    right 0
+    display flex 
+    align-items center
+    justify-content center
+    background rgba(#000, .5)
+    font-family "Caviar-Dreams", Arial, Helvetica, sans-serif
+    color #CCC
+    > div  h1 
+        color #DDD
+        text-align center
+        font-size 2rem
+        font-weight bolder
+        width 100%
+        padding 20px
+    > div ul 
+        margin 0 auto
+        font-weight bolder 
+        font-size 1.1rem
+        padding-left 20px
+        margin auto
+        > li  
+            padding 10px
+            background: rgb(0,0,0);
+            background: linear-gradient(90deg, rgba(#000, .5), transparent 100%);
+            margin 20px
+            list-style none
+
+    
+
+
+.login__box 
+    flex 50%
+    padding 20px 
+    display flex 
+    align-items center
+    justify-content center
+    background darken(#004BA8, 50%)
+    min-height 100vh
+    height 100%
+    font-family "Source-Sans", Arial, Helvetica, sans-serif
+
+.login__header 
+    font-size 1rem
+    > h1 
+        color #DDD
+
+.social__main
+    position absolute
+    bottom 0
+    right 0
+    right 0
+    color #DDD
+    font-size 1rem
+    display flex
+    justify-content flex-end
+    padding-left 5px
+    > div 
+        padding 10px
+        cursor pointer
+        &:hover 
+            color #555
+
+.login__form 
+    width 100%
+    position relative
+.form__btn-wrapper 
+    display flex 
+    flex-wrap wrap
+    width 100%
+    > a  
+        margin 10px
+        margin-left auto   
+        display grid 
+        place-items center
+.input-label 
+    color #DDD
+    font-size 0.75rem !important
+.error__box 
+    color lighten(#FF0001, 30%)
+.error__input 
+    border 1px solid #FF0001 !important
+    border-radius: 2px
+    
+@media screen and (max-width 968px)
+    .form__btn-wrapper a 
+        margin-top 30px
+        margin-right auto
