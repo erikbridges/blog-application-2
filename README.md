@@ -7,7 +7,7 @@ Multiple enhancements, improvements, and tweaks are added.
 
 ## What's Coming Up In This Version
 - The Ability To Make Comments On Blogs
-- Make A Blog Public or Private
+- Make A Blog Public or Unlisted
 - New Feed System (Have Your Blogs listed on your feed)
 - New Follower System (You can now follow users and have their blogs in your feed.)
 
