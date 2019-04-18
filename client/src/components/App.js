@@ -4,10 +4,10 @@ import { HashRouter, Switch, Route } from "react-router-dom";
 // /* === PARTIALS === */
 import Navbar from "./partials/Navbar";
 /* === Routes === */
-import Home from "./Home";
 import Register from "./Register";
 import Login from "./Login";
 import User from "./User";
+import Create from "./Create";
 
 // Main Website Routes
 const App = () => {
@@ -18,7 +18,8 @@ const App = () => {
         <Switch>
           <Route path="/" component={Login} exact />
           <Route path="/register" component={Register} />
-          <Route path="/user/:id" component={User} />
+          <Route path="/user/:id" component={User} exact />
+          <Route path="/user/:id/create" component={Create} />
         </Switch>
       </HashRouter>
     </Fragment>

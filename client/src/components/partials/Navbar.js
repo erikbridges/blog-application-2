@@ -37,9 +37,6 @@ function Navbar() {
             <NavLink to="/blog-search" onClick={() => toggleActive()}>
               Blog Search
             </NavLink>
-            <NavLink to="/login" onClick={() => toggleActive()}>
-              Login
-            </NavLink>
           </div>
         </div>
       </div>

@@ -26,3 +26,34 @@ export function loginUser(user) {
     })
   };
 }
+
+export function addBlog(blog) {
+  const { title, hidden, content } = blog;
+  return {
+    type: "ADD_BLOG",
+    payload: axios.post(
+      "http://localhost:5000/api/blogs/new",
+      {
+        title: title === undefined ? "" : title,
+        hidden,
+        post: content === undefined ? "" : content
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`
+        }
+      }
+    )
+  };
+}
+
+export function getBlogs() {
+  return {
+    type: "GET_ALL_BLOGS",
+    payload: axios.get("http://localhost:5000/api/blogs", {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`
+      }
+    })
+  };
+}

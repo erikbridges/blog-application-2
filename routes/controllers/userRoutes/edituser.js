@@ -2,13 +2,14 @@ import db from "../../../database/index";
 import {
   validateEmail,
   validatePassword,
+  validateUserTitle,
   validateUsername
 } from "../../validators/validators";
 import * as Errors from "restify-errors";
 import bcrypt from "bcryptjs";
 
 export default async (req, res, next) => {
-  const { editWhich, username, email, password } = req.body;
+  const { editWhich, username, email, title, password } = req.body;
   switch (editWhich) {
     case "username": {
       // Validate User
@@ -37,6 +38,29 @@ export default async (req, res, next) => {
         message: "Username updated successfully"
       });
 
+      return next();
+    }
+    case "title": {
+      // Change Title
+      const isValidTitle = validateUserTitle(title);
+      if (isValidTitle.error) {
+        res.send(
+          new Errors.UnprocessableEntityError(isValidTitle.errorMessage)
+        );
+        return next();
+      }
+      const changeTitle = await db("users")
+        .update("title", title)
+        .where("_id", req.users._id);
+      if (changeTitle.length !== 0) {
+        res.send(new Errors.InternalError("Failed to update title."));
+        return next();
+      }
+      res.json({
+        code: 200,
+        success: true,
+        message: "Your title has been updated successfully."
+      });
       return next();
     }
     case "email": {

@@ -76,6 +76,7 @@ export const validatePassword = password => {
 _________________________________________*/
 
 /*  === Title Validate === */
+
 export const validateTitle = title => {
   // Check Limit
   const checkLimit = validator.isLength(title, { min: 3, max: 20 });
@@ -119,7 +120,20 @@ export const validateComment = comment => {
     comment: validator.escape(comment)
   };
 };
-
+// TITLE VALIDATE
+export const validateUserTitle = title => {
+  const checkLimit = validator.isLength(title, { max: 30 });
+  if (!checkLimit) {
+    return {
+      error: true,
+      errorMessage:
+        "Your title is too long. Please limit to only 30 characters."
+    };
+  }
+  return {
+    title: validator.escape(title)
+  };
+};
 // CAPTCHA VALIDATE
 export const validateCaptcha = async captcha => {
   const validCaptcha = await axios.post(

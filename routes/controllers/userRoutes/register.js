@@ -60,6 +60,7 @@ export default async (req, res, next) => {
       _id: shortid.generate(),
       username,
       email,
+      title: "",
       hash,
       followers: JSON.stringify([])
     };

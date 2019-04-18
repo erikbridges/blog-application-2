@@ -75,7 +75,7 @@ routerInstance.post(
   passport.authenticate("jwt", { session: false }),
   CreateBlog
 );
-/* === Get Blogs === */
+/* === Get All Blogs === */
 routerInstance.get(
   "/blogs",
   passport.authenticate("jwt", { session: false }),

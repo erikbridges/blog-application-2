@@ -61,7 +61,7 @@ class Register extends Component {
     if (isValidPass.error) {
       return this.invalidInput(isValidPass.errorMessage);
     }
-    /* Submit to Server 
+    /* Submit to Server
     __________________________________*/
     try {
       const registerUser = await addUser({
@@ -70,7 +70,8 @@ class Register extends Component {
         password,
         captcha: recaptchaValue
       });
-      if (registerUser.data.code == 200) {
+
+      if (registerUser.value.data.code == 200) {
         this.setState({
           username: "",
           email: "",
@@ -117,7 +118,7 @@ class Register extends Component {
                 <div>
                   <p>
                     Form Submitted Successfully.{" "}
-                    <Link to="/login">Please Login.</Link>
+                    <Link to="/">Please Login.</Link>
                   </p>
                 </div>
               ) : (

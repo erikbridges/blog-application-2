@@ -1,0 +1,172 @@
+// Main 
+.main  
+    display flex 
+    min-height 100vh 
+    height 100% 
+    flex-wrap wrap
+
+.menu__main
+    display flex 
+    align-items baseline
+    justify-content center
+    flex-wrap wrap 
+    flex 50%
+    background rgba(#222, .7)
+    color #EEE
+    position relative
+    padding 20px
+.menu__user
+    flex 100%
+    text-align center 
+    color #eeeeee
+    font-family "Source-Sans", Arial, Helvetica, sans-serif
+.img-wrapper 
+    margin auto
+    flex 100% 
+
+.img-wrapper img 
+    display block 
+    margin 0 auto
+    border-radius 100px
+    margin-bottom auto
+    width 100%
+    max-width 200px
+.menu__user 
+    display flex 
+    justify-content center 
+    flex-wrap wrap 
+    font-family "Source-Sans", Arial, Helvetica, sans-serif
+    font-weight bolder
+    > span 
+        flex 100% 
+        font-size 0.75rem
+        font-weight normal
+
+.menu__followers 
+    display flex 
+    justify-content center
+    > span
+        font-family "Caviar-Dreams", Arial, Helvetica, sans-serif
+        border 2px solid #DDD 
+        border-radius: 10px 
+        background #222
+        padding 10px 
+        font-size 1rem
+        margin 10px
+        text-align center
+.menu__nav 
+    display flex 
+    justify-content center
+    flex-wrap wrap  
+    font-family "Caviar-Dreams", Arial, Helvetica, sans-serif
+    > span, a
+        flex 100%
+        color #DDD
+        border 2px solid #DDD 
+        padding 20px
+        font-size 1rem
+        border-radius: 100px 
+        width 50px 
+        height 50px
+        margin 10px
+        display flex 
+        align-items center
+        justify-content center 
+        background #222 
+        cursor pointer
+        font-weight bolder
+        transition .2s ease-in
+        &:hover 
+            background #444
+            color #CCC
+            transition .2s ease-in
+
+.menu__img > img
+    position absolute 
+    top 0 
+    bottom 0 
+    left 0 
+    right 0 
+    width 100% 
+    min-height 100vh 
+    height 100% 
+    display block 
+    z-index: -999
+    filter sepia(50%)
+
+
+// Blog Section
+
+.main__blog 
+    flex 50% 
+    display flex 
+    justify-content center 
+    align-items center
+    background #f4f4f4
+    flex-wrap wrap
+    padding 30px
+    > h2 
+        margin-right auto
+        font-family "Source-Sans", Helvetica, sans-serif
+
+.main__blog-box 
+    padding 20px 
+
+
+.main__blog-settings 
+    width 100%
+    font-size 0.75rem 
+    display flex 
+    justify-content flex-end
+    > span 
+        display grid 
+        place-items center
+        color #DDD
+        margin 10px
+        cursor pointer
+        background #222 
+        border-radius 100px
+        height 40px
+        width 40px
+        padding 10px
+        &:hover 
+            background #444
+            transition .2s ease-in
+
+.main__blog-para 
+    color #222 
+    text-align justify
+    line-height 2em
+    font-size 0.75rem
+    font-family "Source-Sans", Arial, Helvetica, sans-serif
+
+.main__blog-link 
+    color lighten(blue, 40%)
+    text-transform: uppercase
+    margin-top 20px
+    display flex 
+    align-items center
+    font-weight: bolder
+
+.main__blog-pagination 
+    flex 100%
+    display grid 
+    place-items center
+
+
+// Session 
+.session-main 
+    display flex 
+    justify-content center 
+    align-items center
+    flex-wrap wrap 
+    h1, a  
+        flex 100%
+
+@media screen and (max-width 968px)
+    .menu__main 
+        flex 100%
+    .main__blog 
+        flex 100%
+    .img-wrapper img 
+        transform: translateY(0px)
