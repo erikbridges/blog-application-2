@@ -1,21 +1,24 @@
+/* === DEPENDANCIES  === */
 import React, { Component } from "react";
 // import PropTypes from "prop-types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { checkToken } from "../helpers/helpers";
 import {
   faTools,
-  faEdit,
-  faTrash,
   faBlog,
   faUserFriends,
   faPlusCircle,
   faCheck
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
+/* === REQUESTS === */
+import { getBlogs } from "../store/actions/actions";
+/* === STYLE === */
 import styles from "../CSS/users.styl";
 import { Tooltip, Pagination } from "antd";
 import { connect } from "react-redux";
-import { getBlogs } from "../store/actions/actions";
+/* === COMPONENTS === */
+import BlogItem from "../components/partials/BlogItem";
 class User extends Component {
   constructor() {
     super();
@@ -26,27 +29,34 @@ class User extends Component {
       email: "",
       title: "",
       followers: [],
-      current: "blog"
+      current: "blogs"
     };
   }
   async componentDidMount() {
     this.authorizeUser();
   }
   authorizeUser = async () => {
-    const token = await checkToken();
-    if (!token.session) {
-      return this.setState({
-        session: false
-      });
-    } else if (token.session) {
-      this.setState({
-        session: true,
-        _id: token._id,
-        username: token.username,
-        title: token.title,
-        email: token.email,
-        followers: token.followers
-      });
+    try {
+      const token = await checkToken();
+      if (!token.session) {
+        return this.setState({
+          session: false
+        });
+      } else if (token.session) {
+        const blogList = await this.props.getBlogs();
+        this.setState({
+          session: true,
+          _id: token._id,
+          username: token.username,
+          title: token.title,
+          email: token.email,
+          followers: token.followers,
+          blogList: blogList.value.data
+        });
+      }
+    } catch (err) {
+      localStorage.removeItem("token");
+      this.setState({ session: false });
     }
   };
   handleClick = e => {
@@ -55,41 +65,22 @@ class User extends Component {
       current: e.key
     });
   };
-  renderBlogList = () => {
+
+  renderFeed = () => {
+    const { blogList } = this.state;
+    console.log(blogList);
     // Render Blogs from user
-
-    return (
-      <div className={styles["main__blog-box"]}>
-        <div className={styles["main__blog-header"]}>
-          <h1>Blog Title</h1>
-        </div>
-        <div className={styles["main__blog-para"]}>
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eveniet
-          magni possimus pariatur! Ipsam, molestias modi? Aliquam saepe ratione
-          totam in sapiente dolor nemo quibusdam repellendus id, ullam ex,
-          adipisci corporis!
-        </div>
-        <div className={styles["main__blog-link"]}>
-          <a>Visit Blog</a>
-        </div>
-        <div className={styles["main__blog-settings"]}>
-          <Tooltip title="Delete Blog">
-            <span>
-              <FontAwesomeIcon icon={faEdit} />
-            </span>
-          </Tooltip>
-          <Tooltip title="Edit Blog" placement="bottom">
-            <span>
-              <FontAwesomeIcon icon={faTrash} />
-            </span>
-          </Tooltip>
-        </div>
-      </div>
-    );
+    return blogList.map(blogItem => (
+      <BlogItem
+        key={blogItem.blog_id}
+        _id={blogItem.blog_id}
+        title={blogItem.title}
+        desc={blogItem.post}
+        date={blogItem.datecreated}
+        hidden={blogItem.hidden}
+      />
+    ));
   };
-  renderFeed = () =>
-    this.state.current == "blogs" ? this.renderBlogList() : null;
-
   renderUnauthorizedUser = () => (
     <div className={styles["session-main"]}>
       <h1>Your Session Has Ended.</h1>
@@ -115,6 +106,7 @@ class User extends Component {
           <div>
             <h1 className={styles["menu__user"]}>
               {username}
+              <span> {email} </span>
               <span>{title == "" ? "Title goes here..." : title}</span>
             </h1>
             <div className={styles["menu__followers"]}>
@@ -152,7 +144,7 @@ class User extends Component {
           </div>
         </div>
         <div className={styles["main__blog"]}>
-          <h2> My Feed </h2>
+          <h2 className={styles["feed__title"]}> Blogs Posted </h2>
           {this.renderFeed()}
           <div className={styles["main__blog-pagination"]}>
             <Pagination simple defaultCurrent={1} total={50} />

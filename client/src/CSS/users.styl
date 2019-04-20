@@ -104,13 +104,20 @@
     align-items center
     background #f4f4f4
     flex-wrap wrap
-    padding 30px
-    > h2 
-        margin-right auto
-        font-family "Source-Sans", Helvetica, sans-serif
-
+.feed__title 
+    background #333
+    padding 10px
+    font-size 1.5rem
+    color #dddddd
+    width 100%
+    text-align center 
+    font-family "Caviar-Dreams", Arial, Helvetica, sans-serif
+    
 .main__blog-box 
-    padding 20px 
+    flex 100%
+    border-bottom 1px solid #DDD
+    padding 25px
+    position relative
 
 
 .main__blog-settings 
@@ -132,13 +139,26 @@
         &:hover 
             background #444
             transition .2s ease-in
-
+.main__blog-header 
+    font-size 20px
+    margin-left auto
+    > h1
+        font-weight bolder
+    > div 
+        font-size 0.75rem 
+        color #444
+        font-style italic
+        padding-bottom 20px
+        position absolute 
+        top 20%
+        right 5%
 .main__blog-para 
     color #222 
     text-align justify
     line-height 2em
     font-size 0.75rem
     font-family "Source-Sans", Arial, Helvetica, sans-serif
+    width 100%
 
 .main__blog-link 
     color lighten(blue, 40%)
@@ -147,11 +167,13 @@
     display flex 
     align-items center
     font-weight: bolder
+    margin-right auto
 
 .main__blog-pagination 
     flex 100%
     display grid 
     place-items center
+    padding 20px
 
 
 // Session 

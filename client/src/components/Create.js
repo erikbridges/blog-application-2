@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { Button, Checkbox, message } from "antd";
 import { connect } from "react-redux";
 import { addBlog } from "../store/actions/actions";
+import { stateToHTML } from "draft-js-export-html";
 import {
   faBold,
   faItalic,
@@ -145,16 +146,16 @@ class Create extends Component {
     try {
       const { title, hidden } = this.state;
       const contentState = this.state.editorState.getCurrentContent();
-      let draft = { content: convertToRaw(contentState) };
-      draft.content = JSON.stringify(draft.content);
+      const contentHTML = stateToHTML(contentState);
+      console.log(contentHTML);
       // Add Blog to user
       const createBlog = await addBlog({
         title,
         hidden,
-        content: draft.content
+        content: contentHTML
       });
       message.success("Blog submitted successfully");
-      this.props.location.push("/");
+      this.props.history.push("/");
     } catch (err) {
       message.error("Failed to add new blog. Please try again.");
     }
