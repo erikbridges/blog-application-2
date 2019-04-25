@@ -1,0 +1,66 @@
+.panel__main
+    background #f4f4f4
+    padding 10px
+    display flex 
+    align-items center
+    width 100%
+.panel__icon
+    font-size 1.2rem
+    display flex 
+    flex-wrap wrap 
+    > span 
+        flex 100%
+        font-size 1rem
+        padding 10px
+        &:nth-child(1)
+            font-size 1.2rem
+            cursor pointer
+            &:hover 
+                color darken(blue, 20%)
+.panel__settings
+    > span
+        font-size 0.80rem
+        padding 10px
+        cursor pointer
+        &:hover 
+            color #999
+
+
+.panel__title
+    font-size 1.4rem 
+    font-family  "Source-Sans", Arial, Helvetica, sans-serif
+    margin-left auto
+    padding 5px
+    font-weight bolder
+
+.post 
+    flex 100%
+    margin 50px
+    justify-content center 
+    align-items center
+    flex-wrap wrap 
+
+.post__title 
+    flex 100%
+    font-weight bolder
+    display block
+    clear fix
+    > span 
+        font-size 1rem
+        display block
+        &:nth-child(3)
+            float right
+            font-style italic
+            font-size 1rem
+            font-weight lighter
+
+.post__main
+    padding 50px
+    text-align justify
+    font-size 1rem
+    font-family "Source-Sans", Arial, Helvetica, sans-serif
+
+
+@media screen and (max-width: 968px)
+    .post 
+        margin 10px

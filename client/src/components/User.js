@@ -8,14 +8,15 @@ import {
   faBlog,
   faUserFriends,
   faPlusCircle,
-  faCheck
+  faCheck,
+  faSearch
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 /* === REQUESTS === */
 import { getBlogs } from "../store/actions/actions";
 /* === STYLE === */
 import styles from "../CSS/users.styl";
-import { Tooltip, Pagination } from "antd";
+import { Tooltip } from "antd";
 import { connect } from "react-redux";
 /* === COMPONENTS === */
 import BlogItem from "../components/partials/BlogItem";
@@ -29,6 +30,8 @@ class User extends Component {
       email: "",
       title: "",
       followers: [],
+      blogList: [],
+      blogListFilter: [],
       current: "blogs"
     };
   }
@@ -65,21 +68,28 @@ class User extends Component {
       current: e.key
     });
   };
-
+  getInput = e => this.setState({ [e.target.name]: e.target.value });
   renderFeed = () => {
     const { blogList } = this.state;
-    console.log(blogList);
-    // Render Blogs from user
-    return blogList.map(blogItem => (
-      <BlogItem
-        key={blogItem.blog_id}
-        _id={blogItem.blog_id}
-        title={blogItem.title}
-        desc={blogItem.post}
-        date={blogItem.datecreated}
-        hidden={blogItem.hidden}
-      />
-    ));
+    if (blogList.length !== 0) {
+      // Render Blogs from user
+      return blogList.map(blogItem => (
+        <BlogItem
+          key={blogItem.blog_id}
+          _id={blogItem.blog_id}
+          title={blogItem.title}
+          desc={blogItem.post}
+          date={blogItem.datecreated}
+          hidden={blogItem.hidden}
+        />
+      ));
+    } else {
+      return (
+        <div className={styles["blog__not-found"]}>
+          <h2>No Blog Post Found. Please search another query.</h2>
+        </div>
+      );
+    }
   };
   renderUnauthorizedUser = () => (
     <div className={styles["session-main"]}>
@@ -87,6 +97,17 @@ class User extends Component {
       <Link to="/">Click here to login in.</Link>
     </div>
   );
+  getBlogsByTitle = async e => {
+    e.preventDefault();
+    const { input } = this.state;
+    const blogList = await this.props.getBlogs();
+    const filterBlogList = blogList.value.data.filter(
+      blogItem => blogItem.title === input
+    );
+    this.setState({
+      blogList: input == "" ? blogList.value.data : filterBlogList
+    });
+  };
   render() {
     const { session, username, email, followers, title } = this.state;
     return !session ? (
@@ -144,11 +165,21 @@ class User extends Component {
           </div>
         </div>
         <div className={styles["main__blog"]}>
-          <h2 className={styles["feed__title"]}> Blogs Posted </h2>
-          {this.renderFeed()}
-          <div className={styles["main__blog-pagination"]}>
-            <Pagination simple defaultCurrent={1} total={50} />
+          <h2 className={styles["feed__title"]}> Blogs Posts </h2>
+          <div className={styles["feed__input"]}>
+            <input
+              placeholder="Search"
+              name="input"
+              onChange={e => this.getInput(e)}
+            />
+            <button
+              className={styles["btn-search"]}
+              onClick={e => this.getBlogsByTitle(e)}
+            >
+              <FontAwesomeIcon icon={faSearch} size="lg" />
+            </button>
           </div>
+          {this.renderFeed()}
         </div>
       </div>
     );

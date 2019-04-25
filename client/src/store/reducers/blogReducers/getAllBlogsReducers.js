@@ -4,7 +4,7 @@ const initialState = {
   errorMessage: ""
 };
 
-export default function signInReducer(state = initialState, action) {
+export default function getAllBlogsReducer(state = initialState, action) {
   switch (action.type) {
     case "GET_ALL_BLOGS_PENDING": {
       return { ...state, loading: true, error: false };

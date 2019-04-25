@@ -5,7 +5,7 @@ import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { Tooltip, Tag, Button } from "antd";
 import moment from "moment";
 import { Link } from "react-router-dom";
-import Interweave from "interweave";
+import ReactHtmlParser from "react-html-parser";
 const BlogItem = ({ title, desc, date, hidden, _id }) => {
   return (
     <div className={styles["main__blog-box"]}>
@@ -27,12 +27,13 @@ const BlogItem = ({ title, desc, date, hidden, _id }) => {
         </div>
       </div>
       <div className={styles["main__blog-para"]}>
-        <Interweave content={JSON.parse(desc).substring(0, 15) + "..."} />
+        {ReactHtmlParser(JSON.parse(desc).substring(0, 15))}
+        ...
       </div>
       <div className={styles["main__blog-settings"]}>
         <div className={styles["main__blog-link"]}>
           <Link to={`/blog/post/${_id}`}>
-            <Button type="primary">Visit Blog</Button>
+            <Button type="primary">Visit Post</Button>
           </Link>
         </div>
         <Tooltip title="Edit Blog">

@@ -57,3 +57,14 @@ export function getBlogs() {
     })
   };
 }
+
+export function getBlogById(id) {
+  return {
+    type: "GET_BLOG",
+    payload: axios.get(`http://localhost:5000/api/blogs/${id}`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`
+      }
+    })
+  };
+}
