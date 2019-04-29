@@ -19,6 +19,7 @@ passport.use(
         }
         return done(null, userMatch[0]);
       } catch (ex) {
+        console.log(ex.message);
         return done(ex.message, false);
       }
     }

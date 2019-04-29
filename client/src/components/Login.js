@@ -46,7 +46,7 @@ class Login extends Component {
         }
       });
       if (getUser.data.code == 200) {
-        this.props.history.push(`/user/${getUser.data._id}`);
+        return this.props.history.push(`/user/${getUser.data._id}`);
       }
     } catch (ex) {
       return;

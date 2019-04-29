@@ -26,7 +26,7 @@ export function loginUser(user) {
     })
   };
 }
-
+// Add Blog To Author
 export function addBlog(blog) {
   const { title, hidden, content } = blog;
   return {
@@ -47,6 +47,7 @@ export function addBlog(blog) {
   };
 }
 
+// Get All Blogs from id
 export function getBlogs() {
   return {
     type: "GET_ALL_BLOGS",
@@ -58,10 +59,26 @@ export function getBlogs() {
   };
 }
 
+// Get all blogs from all users
+export function getBlogsAll() {
+  return {
+    type: "GET_ALL_BLOGS_SEARCH",
+    payload: axios.get("http://localhost:5000/api/blogs/all")
+  };
+}
+// Get  blog from user id
 export function getBlogById(id) {
   return {
+    type: "GET_BLOG_BY_ID",
+    payload: axios.get(`http://localhost:5000/api/blogs/${id}`)
+  };
+}
+
+// Get blogs from user id
+export function getBlogsFromAuthor() {
+  return {
     type: "GET_BLOG",
-    payload: axios.get(`http://localhost:5000/api/blogs/${id}`, {
+    payload: axios.get("http://localhost:5000/api/blogs", {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`
       }

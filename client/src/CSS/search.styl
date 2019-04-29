@@ -1,0 +1,38 @@
+.search__main 
+    display flex 
+    justify-content center 
+    align-items center
+    min-height 70vh
+    height 100%
+    font-family "Source-Sans", Arial, Helvetica, sans-serif
+    flex-wrap wrap
+.search__bar 
+    background #444444
+    color #EEE
+    border-radius: 30px 
+    padding 20px
+    animation slideIn 1s;
+    width 70%
+    display flex
+    align-items center
+    > input 
+        border none 
+        background transparent  
+        padding 20px
+        font-size 1.5rem
+.search__recent 
+    display block 
+    margin 0 auto
+    width 70%
+    min-height 30vh
+    text-align center
+    background #DDD
+@keyframes slideIn 
+    from 
+        width 0% 
+        opacity 0
+    to  
+        width 70%
+        opacity 1
+
+

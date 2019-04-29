@@ -9,7 +9,8 @@ module.exports = {
   entry: ["@babel/polyfill", "./src/index.js"],
   output: {
     path: path.resolve(__dirname, "build"),
-    filename: "JS/main_bundle.js",
+    filename: "./JS/[name].chunkhash.bundle.js",
+    chunkFilename: "./JS/[name].chunkhash.bundle.js",
     publicPath: "./"
   },
   devtool: "source-map",
@@ -18,6 +19,35 @@ module.exports = {
     historyApiFallback: true,
     publicPath: "/",
     watchContentBase: true
+  },
+  optimization: {
+    splitChunks: {
+      minSize: 30000,
+      maxSize: 0,
+      minChunks: 1,
+      maxAsyncRequests: 5,
+      cacheGroups: {
+        default: false,
+        vendors: false,
+
+        // vendor chunk
+        vendor: {
+          // sync + async chunks
+          chunks: "all",
+
+          // import file path containing node_modules
+          test: /node_modules/
+        },
+        common: {
+          name: "common",
+          minChunks: 2,
+          chunks: "async",
+          priority: 10,
+          reuseExistingChunk: true,
+          enforce: true
+        }
+      }
+    }
   },
   module: {
     rules: [
@@ -29,7 +59,10 @@ module.exports = {
             loader: "babel-loader",
             options: {
               presets: ["@babel/preset-env", "@babel/preset-react"],
-              plugins: ["@babel/plugin-proposal-class-properties"]
+              plugins: [
+                "@babel/plugin-proposal-class-properties",
+                "@babel/plugin-syntax-dynamic-import"
+              ]
             }
           },
           {

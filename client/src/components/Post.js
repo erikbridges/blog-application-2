@@ -18,7 +18,7 @@ class Post extends Component {
     super(props);
     this.state = {
       title: "",
-      author: "",
+      author: "No Data",
       post: "<p>Loading...</p>",
       authorized: false,
       hidden: false,
@@ -38,6 +38,7 @@ class Post extends Component {
         // You cannot view this content
         this.setState({
           title: "Private Content",
+          author: post.value.data.author_name,
           date: post.value.data.datecreated,
           hidden: post.value.data.hidden,
           post:
@@ -46,6 +47,7 @@ class Post extends Component {
       } else {
         this.setState({
           title: post.value.data.title,
+          author: post.value.data.author_name,
           date: post.value.data.datecreated,
           hidden: post.value.data.hidden,
           post: JSON.parse(post.value.data.post)
@@ -84,7 +86,7 @@ class Post extends Component {
     }
   };
   render() {
-    const { authorized, title, post, date, hidden } = this.state;
+    const { authorized, title, author, post, date, hidden } = this.state;
     return (
       <div>
         <div className={styles["panel__main"]}>
@@ -127,16 +129,14 @@ class Post extends Component {
                 <Tag color="purple">Private</Tag>
               </Tooltip>
             ) : (
-              <Tooltip title="This post is visible to everyone.">
-                <Tag color="blue">Public</Tag>
-              </Tooltip>
+              <Tag color="blue">Public</Tag>
             )}
           </span>
         </div>
         <div className={styles["post"]}>
           <div className={styles["post__title"]}>
-            <span>{title}</span>
-            <span>Username</span>
+            <span className={styles["post__title-title"]}>{title}</span>
+            <span className={styles["post__title-user"]}>By: {author}</span>
             <span>{moment(new Date(date)).format("MMMM D, YYYY")}</span>
           </div>
           <div className={styles["post__main"]}>{ReactHtmlParser(post)}</div>

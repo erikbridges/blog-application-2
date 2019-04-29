@@ -23,8 +23,9 @@ import DeleteUser from "./controllers/userRoutes/deleteuser";
 /* Blog Controllers
 ________________________________________*/
 import CreateBlog from "./controllers/blogRoutes/createblog";
-import GetBlog from "./controllers/blogRoutes/getblog";
 import GetAllBlogs from "./controllers/blogRoutes/getallblogs";
+import GetAllBlogsById from "./controllers/blogRoutes/getallblogsbyid";
+import GetBlog from "./controllers/blogRoutes/getblog";
 import EditBlog from "./controllers/blogRoutes/editblog";
 import DeleteBlog from "./controllers/blogRoutes/deleteblog";
 
@@ -75,18 +76,19 @@ routerInstance.post(
   passport.authenticate("jwt", { session: false }),
   CreateBlog
 );
-/* === Get All Blogs === */
+
+/* === Get All Blogs From All Authors === */
+routerInstance.get("/blogs/all", GetAllBlogs);
+
+/* === Get All Blogs By Author Id === */
 routerInstance.get(
   "/blogs",
   passport.authenticate("jwt", { session: false }),
-  GetAllBlogs
+  GetAllBlogsById
 );
 /* ==== Get Blog ==== */
-routerInstance.get(
-  "/blogs/:id",
-  passport.authenticate("jwt", { session: false }),
-  GetBlog
-);
+routerInstance.get("/blogs/:id", GetBlog);
+
 /* ==== Edit Blog ==== */
 routerInstance.patch(
   "/blogs/:id",

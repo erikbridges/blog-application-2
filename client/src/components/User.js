@@ -13,7 +13,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 /* === REQUESTS === */
-import { getBlogs } from "../store/actions/actions";
+import { getBlogsFromAuthor } from "../store/actions/actions";
 /* === STYLE === */
 import styles from "../CSS/users.styl";
 import { Tooltip } from "antd";
@@ -35,7 +35,7 @@ class User extends Component {
       current: "blogs"
     };
   }
-  async componentDidMount() {
+  componentDidMount() {
     this.authorizeUser();
   }
   authorizeUser = async () => {
@@ -46,7 +46,8 @@ class User extends Component {
           session: false
         });
       } else if (token.session) {
-        const blogList = await this.props.getBlogs();
+        const blogList = await this.props.getBlogsFromAuthor();
+        console.log(blogList);
         this.setState({
           session: true,
           _id: token._id,
@@ -58,6 +59,7 @@ class User extends Component {
         });
       }
     } catch (err) {
+      console.log(err);
       localStorage.removeItem("token");
       this.setState({ session: false });
     }
@@ -100,7 +102,7 @@ class User extends Component {
   getBlogsByTitle = async e => {
     e.preventDefault();
     const { input } = this.state;
-    const blogList = await this.props.getBlogs();
+    const blogList = await this.props.getBlogsFromAuthor();
     const filterBlogList = blogList.value.data.filter(
       blogItem => blogItem.title === input
     );
@@ -109,7 +111,7 @@ class User extends Component {
     });
   };
   render() {
-    const { session, username, email, followers, title } = this.state;
+    const { _id, session, username, email, followers, title } = this.state;
     return !session ? (
       this.renderUnauthorizedUser()
     ) : (
@@ -152,7 +154,7 @@ class User extends Component {
                 <FontAwesomeIcon icon={faBlog} style={{ marginRight: 10 }} />
                 Blogs
               </span>
-              <Link to={`/user/${this.state._id}/create`}>
+              <Link to={`/user/${_id}/create`}>
                 <span>
                   <FontAwesomeIcon
                     icon={faPlusCircle}
@@ -190,7 +192,7 @@ const mapStateToProps = state => {
   return state;
 };
 const mapActionsToProps = {
-  getBlogs
+  getBlogsFromAuthor
 };
 
 export default connect(

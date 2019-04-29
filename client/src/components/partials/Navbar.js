@@ -34,7 +34,7 @@ function Navbar() {
             <NavLink to="/" onClick={() => toggleActive()}>
               Home
             </NavLink>
-            <NavLink to="/blog-search" onClick={() => toggleActive()}>
+            <NavLink to="/search" onClick={() => toggleActive()}>
               Blog Search
             </NavLink>
           </div>

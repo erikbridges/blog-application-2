@@ -3,15 +3,15 @@ import db from "../../../database/index";
 
 export default async (req, res, next) => {
   try {
-    // Get All blogs from all authors.
-    const GetAllBlogs = await db("blogs")
+    // Get All Blogs From The User Id
+    const GetAllBlogsById = await db("blogs")
       .select("*")
-      .where("hidden", false);
-    if (GetAllBlogs.length == 0) {
+      .where("author_id", req.user._id);
+    if (GetAllBlogsById.length == 0) {
       res.send(new Errors.NotFoundError("No blogs are found."));
       return next();
     }
-    res.json(GetAllBlogs);
+    res.json(GetAllBlogsById);
     return next();
   } catch (ex) {
     res.send(
