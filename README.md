@@ -3,7 +3,7 @@ A updated and remade version of my previous blog application.
 See The Previous Version: https://github.com/erikbridges/blog-site
 Multiple enhancements, improvements, and tweaks are added.
 
-# Blog Application 2.0 (coming soon)
+# Blog Application 2.0 (Discontinued)
 
 ## What's Coming Up In This Version
 - The Ability To Make Comments On Blogs
