@@ -30,7 +30,7 @@
     "restify-errors": "^7.0.0",
     "restify-router": "^0.5.1",
     "shortid": "^2.2.14",
-    "validator": "^10.11.0"
+    "validator": "^13.7.0"
   },
   "devDependencies": {
     "@babel/core": "^7.4.3",
