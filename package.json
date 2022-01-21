@@ -41,7 +41,7 @@
     "eslint-plugin-prettier": "^3.0.1",
     "eslint-plugin-react": "^7.12.4",
     "jest": "^24.7.1",
-    "log4js": "^4.1.0",
+    "log4js": "^6.4.0",
     "nodemon": "^1.18.10",
     "prettier": "^1.16.4",
     "supertest": "^4.0.2"
